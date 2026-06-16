@@ -1,0 +1,31 @@
+[package]
+name = "wsajaaiqiqiqjqja/aura-gateway"
+version = "0.1.0"
+description = "AURA Gateway — VLESS/XHTTP/WS proxy on Wasmer Edge"
+
+[dependencies]
+"wasmer/python" = "^3.12.9"
+
+[fs]
+"/src" = "./src"
+"/app/data" = "./data"
+"/cpython/lib/python3.12" = "./.env/lib/python3.12"
+
+[[command]]
+name = "server"
+module = "wasmer/python:python"
+runner = "wasi"
+
+[command.annotations.wasi]
+main-args = [
+    "-m", "uvicorn",
+    "main:app",
+    "--host", "0.0.0.0",
+    "--port", "8000",
+    "--no-access-log",
+]
+env = [
+    "PYTHONPATH=/src",
+    "PYTHONEXECUTABLE=/bin/python",
+    "PORT=8000",
+]

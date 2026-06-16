@@ -1,0 +1,18 @@
+kind: wasmer.io/App.v0
+name: aura-gateway
+owner: YOUR_WASMER_USERNAME
+package: YOUR_WASMER_USERNAME/aura-gateway
+
+env:
+  PORT: "8000"
+  ADMIN_TOKEN: "aura_secret_2026"
+  ADMIN_PATH: "panel"
+  DB_FILE: "/app/data/aura_gateway.db"
+  # PUBLIC_HOST را بعد از اولین دیپلوی پر کنید:
+  # PUBLIC_HOST: "aura-gateway-YOUR_WASMER_USERNAME.wasmer.app"
+
+health_checks:
+  - path: /
+    interval: 30
+    timeout: 10
+    unhealthy_threshold: 3
