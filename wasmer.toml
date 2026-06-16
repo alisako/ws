@@ -1,0 +1,26 @@
+[package]
+name = "aura-gateway"
+version = "0.1.0"
+description = "AURA Gateway — Async VLESS Direct Proxy / Gateway"
+readme = "README.md"
+
+[[modules]]
+name = "aura-app"
+source = "."
+abi = "wasi"
+
+[[commands]]
+name = "server"
+module = "aura-app"
+runner = "docker"
+
+[deploy]
+# تنظیمات سرور و پورت دامین برای Wasmer Edge
+[[deploy.services]]
+image = "."
+build = "Dockerfile"
+architecture = "amd64"
+
+[[deploy.services.ports]]
+port = 8000
+handler = "http"
