@@ -1,7 +1,7 @@
 [package]
-name = "aura-gateway"
+name = "wsajaaiqiqiqjqja/aura-gateway"  # 👈 حتماً به جای username نام کاربری خود در Wasmer را بگذارید
 version = "0.1.0"
-description = "AURA Gateway — Async VLESS Direct Proxy / Gateway"
+description = "AURA Gateway VLESS Proxy"
 readme = "README.md"
 
 [[modules]]
@@ -15,11 +15,12 @@ module = "aura-app"
 runner = "docker"
 
 [deploy]
-# تنظیمات سرور و پورت دامین برای Wasmer Edge
 [[deploy.services]]
 image = "."
 build = "Dockerfile"
 architecture = "amd64"
+# 👈 اضافه کردن این خط به Wasmer دستور می‌دهد کانتینر داکر را دقیقا طبق تنظیمات خودش لود کند
+entrypoint = ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
 
 [[deploy.services.ports]]
 port = 8000
